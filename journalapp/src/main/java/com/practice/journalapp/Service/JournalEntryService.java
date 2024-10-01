@@ -28,10 +28,11 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
 
-    public Optional<JournalEntry> deleteJournalEntryById(ObjectId id) {
+    public void deleteJournalEntryById(ObjectId id) {
         Optional<JournalEntry> entry = journalEntryRepository.findById(id);
-        journalEntryRepository.deleteById(id);
-        return entry;
+        if (entry.isPresent()) {
+            journalEntryRepository.deleteById(id);
+        }
     }
 
     public JournalEntry updateJournalEntryById(ObjectId id, JournalEntry updatedEntry) {
